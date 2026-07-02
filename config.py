@@ -10,9 +10,9 @@ PROCESSED_DIR = DATA_DIR / "processed"
 START_DATE = "2025-06-01"
 END_DATE = "2026-06-30"
 
-REQUEST_INTERVAL_SECONDS = 0.6
-REQUEST_TIMEOUT_SECONDS = 15
-REQUEST_RETRIES = 3
+REQUEST_INTERVAL_SECONDS = 2.0
+REQUEST_TIMEOUT_SECONDS = 30
+REQUEST_RETRIES = 5
 
 # 东方财富公开接口字段可能调整。需要更高稳定性时可替换为 AkShare/Tushare 数据源。
 EASTMONEY_QUOTE_API = "https://push2.eastmoney.com/api/qt/clist/get"
@@ -27,5 +27,6 @@ USER_AGENT = (
 )
 
 MAIN_BOARD_MARKET_FILTER = "m:1+t:2,m:0+t:6"
+
 
 
