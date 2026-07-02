@@ -38,6 +38,11 @@ def main() -> None:
 
     if not args.skip_crawl:
         basic = run_step("fetch basic", lambda: fetch_stock_basic(force=args.force))
+        if basic.empty or "code" not in basic.columns:
+            raise RuntimeError(
+                "未获取到股票基础列表。请检查东方财富接口是否临时不可用，"
+                "或删除 data/raw/http_cache 后使用 --force 重试。"
+            )
         codes = sorted(basic["code"].dropna().unique().tolist())
         daily = run_step("fetch daily", lambda: fetch_daily_history(codes, feature_start, target_end, force=args.force))
         limit_pool = run_step("fetch limit-up pool", lambda: fetch_limit_up_samples(args.start_date, args.end_date, force=args.force))
@@ -76,5 +81,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 

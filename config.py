@@ -1,4 +1,4 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -26,5 +26,6 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
 )
 
-MAIN_BOARD_MARKET_FILTER = "(m:1+t:2),(m:0+t:6)"
+MAIN_BOARD_MARKET_FILTER = "m:1+t:2,m:0+t:6"
+
 

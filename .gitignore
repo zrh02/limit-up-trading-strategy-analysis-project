@@ -1,6 +1,7 @@
-__pycache__/
+﻿__pycache__/
 *.py[cod]
 .venv/
+.venv*/
 venv/
 env/
 .env
@@ -12,4 +13,5 @@ data/processed/*
 !data/raw/.gitkeep
 !data/cleaned/.gitkeep
 !data/processed/.gitkeep
+
 

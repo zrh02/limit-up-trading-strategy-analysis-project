@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 
 import pandas as pd
 
@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 FIELDS = "f12,f14,f20,f21,f9,f23,f26"
+BASIC_COLUMNS = ["code", "name", "total_market_cap", "float_market_cap", "pe", "pb", "list_date"]
 
 
 def fetch_stock_basic(force: bool = False) -> pd.DataFrame:
@@ -66,7 +67,7 @@ def fetch_stock_basic(force: bool = False) -> pd.DataFrame:
     df["pb"] = pd.to_numeric(df["pb"], errors="coerce")
     save_csv(df, raw_path)
     save_csv(df, cleaned_path)
-    return df[["code", "name", "total_market_cap", "float_market_cap", "pe", "pb", "list_date"]]
+    return df[BASIC_COLUMNS]
 
 
 def add_listing_days(panel: pd.DataFrame, basic: pd.DataFrame) -> pd.DataFrame:
@@ -74,4 +75,5 @@ def add_listing_days(panel: pd.DataFrame, basic: pd.DataFrame) -> pd.DataFrame:
     out["date"] = out["date"].map(standardize_date)
     out["listing_days"] = (pd.to_datetime(out["date"]) - pd.to_datetime(out["list_date"])).dt.days
     return out
+
 
