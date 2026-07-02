@@ -1,0 +1,61 @@
+field_cn,field_en,dtype,source,method
+交易日期,date,string,all,统一为 YYYY-MM-DD
+股票代码,code,string,all,统一为 6 位字符串
+股票名称,name,string,东方财富行情/涨停池,直接获取；缺失时由基础信息补齐
+是否封板,is_sealed,bool,东方财富涨停池/日行情,涨停池为 True；日线兜底用收盘价是否达到估算涨停价
+是否炸板,is_broken,bool,东方财富涨停池/日行情,最高触板但收盘未封板为 True
+涨停类型,limit_up_type,string,东方财富涨停池,由连板数映射为首板/二板/N板；接口缺失保留 NaN
+连板数,limit_up_streak,float,东方财富涨停池,字段 lbc
+第一次封板时间,first_seal_time,string,东方财富涨停池,统一为 HH:MM:SS
+最后封板时间,last_seal_time,string,东方财富涨停池,统一为 HH:MM:SS
+炸板次数,break_seal_count,float,东方财富涨停池,字段 zbc
+封单金额,seal_amount,float,东方财富涨停池,元转亿元
+封单量,seal_volume,float,TODO,东方财富公开接口不稳定；可用 AkShare/盘口数据补充
+封单比,seal_ratio,float,TODO,东方财富公开接口不稳定；可用封单量/流通股本计算
+尾盘是否封板,late_sealed,bool,TODO,需要分时或盘口数据识别
+开盘价,open,float,东方财富日行情,前复权日 K
+最高价,high,float,东方财富日行情,前复权日 K
+最低价,low,float,东方财富日行情,前复权日 K
+收盘价,close,float,东方财富日行情,前复权日 K
+成交量,volume,float,东方财富日行情,股
+成交额,amount,float,东方财富日行情,元；如进入宽表可按需求转亿元
+换手率,turnover_rate,float,东方财富日行情/涨停池,百分数转小数
+总市值,total_market_cap,float,东方财富行情,元转亿元
+流通市值,float_market_cap,float,东方财富行情,元转亿元
+市盈率,pe,float,东方财富行情,可选 winsorize
+市净率,pb,float,东方财富行情,可选 winsorize
+上市日期,list_date,string,东方财富行情,YYYY-MM-DD
+上市天数,listing_days,int,基础信息+样本日期,样本日减上市日期
+主力净流入,main_net_inflow,float,东方财富资金流,元转亿元
+主力净流入占比,main_net_inflow_ratio,float,东方财富资金流,百分数转小数
+超大单净流入,super_large_net_inflow,float,东方财富资金流,元转亿元
+超大单净流入占比,super_large_net_inflow_ratio,float,东方财富资金流,百分数转小数
+大单净流入,large_net_inflow,float,东方财富资金流,元转亿元
+大单净流入占比,large_net_inflow_ratio,float,东方财富资金流,百分数转小数
+中单净流入,medium_net_inflow,float,东方财富资金流,元转亿元
+中单净流入占比,medium_net_inflow_ratio,float,东方财富资金流,百分数转小数
+小单净流入,small_net_inflow,float,东方财富资金流,元转亿元
+小单净流入占比,small_net_inflow_ratio,float,东方财富资金流,百分数转小数
+近5日涨幅,return_5d,float,日行情计算,close/close.shift(5)-1
+近10日涨幅,return_10d,float,日行情计算,close/close.shift(10)-1
+近20日涨幅,return_20d,float,日行情计算,close/close.shift(20)-1
+近5日成交量变化,volume_change_5d,float,日行情计算,volume/volume.shift(5)-1
+近10日成交量变化,volume_change_10d,float,日行情计算,volume/volume.shift(10)-1
+是否创60日新高,is_60d_high,bool,日行情计算,close >= rolling60 high max
+连续上涨天数,consecutive_up_days,int,日行情计算,close 大于前收的连续天数
+连续阳线数量,consecutive_positive_candles,int,日行情计算,close 大于 open 的连续天数
+行业涨幅,industry_return,float,TODO/东方财富板块快照,历史回溯建议 AkShare/Tushare
+行业排名,industry_rank,float,TODO/东方财富板块快照,按行业涨幅降序排名
+概念涨幅,concept_return,float,TODO,历史概念行情与个股概念归属合并
+概念涨停数量,concept_limit_up_count,float,TODO,概念成分股与样本表统计
+所属概念数量,concept_count,float,TODO,个股概念归属数量
+上证指数当日涨跌幅,sh_index_return,float,东方财富指数日行情,百分数转小数
+深证成指当日涨跌幅,sz_index_return,float,东方财富指数日行情,百分数转小数
+全市场涨停家数,market_limit_up_count,int,样本表统计,date 分组 code 去重
+全市场炸板率,market_break_rate,float,样本表统计,date 分组 is_broken 均值
+第二日开盘收益,next_open_return,float,日行情计算,next_open/sample_close-1
+第二日最高收益,next_high_return,float,日行情计算,next_high/sample_close-1
+第二日最低收益,next_low_return,float,日行情计算,next_low/sample_close-1
+第二日收盘收益,next_close_return,float,日行情计算,next_close/sample_close-1
+第三日收益,third_day_return,float,日行情计算,third_close/sample_close-1
+是否连板,is_next_limit_up,bool,日行情计算,次日最高价是否触及估算涨停价
